@@ -5,5 +5,3 @@ Use DevOps to learn how to make a series of programs that complete series of tas
 ## About Perrin Harrs
 
 A student at TN Tech that's doing their best.
-
-

@@ -1,0 +1,38 @@
+---
+- hosts: all 
+  become: yes  
+  become_method: sudo
+  tasks:
+    - name: Install python-apt
+      ansible.builtin.package:
+        name: python3-apt
+        state: present
+    - name: Install apache2
+      ansible.builtin.package:
+        name: apache2
+        state: present
+    - name: Copy apache2.conf
+      ansible.builtin.copy:
+        src: /home/perrinaharris/pharris43-csc2510-devops/config/apache2.conf
+        dest: /etc/apache2/apache2.conf
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Copy index.html
+      ansible.builtin.copy:
+        src: /home/perrinaharris/pharris43-csc2510-devops/site/index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Create a symbolic link
+      ansible.builtin.file:
+        src: /file/to/link/to
+        dest: /path/to/symlink
+        owner: root
+        group: root
+        state: link
+    - name: Restart service httpd, in all cases
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
